@@ -10,6 +10,10 @@ Given /the following users exist/ do |users_table|
   end
 end
 
+Given /^I am logged into the regular user panel$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
 When /^I am logged into the admin panel as "(.*)"$/ do |login|
   visit '/accounts/login'
   fill_in 'user_login', :with => login
