@@ -26,17 +26,21 @@ When /^I (re)?visit the the edit page for "(.*)"$/ do |re, title|
   visit 'admin/content/edit/' + Article.find_by_title(title).id.to_s
 end
 
-Given /^I attempt to merge with "(.*?)"$/ do |title|
-pending
-#  fill_in 'merge_with', :with => Article.find_by_title(title).id
-#  click_button 'Merge'
+When /^I attempt to merge with "(.*)"$/ do |title|
+  fill_in 'merge_with', :with => Article.find_by_title(title).id
+  click_button 'Merge'
 end
 
-#When /^I attempt to merge with "(.*)"$/ do |title|
-#  fill_in 'merge_with', :with => Article.find_by_title(title).id
-#  click_button 'Merge'
+#///////////////////////////////////////////////
+#And /^I should see button "(.*)"$/ do |button|
+#  find_button(button).should_not be_false
 #end
-#////////////////////////////////////////////////////////////////
-Then /^I should not see the "([^"]*)" button$/ do | button_name |
-  assert find_button(button_name) == nil
-end
+
+#And /^I should not see button "(.*)"$/ do |button|
+#  page.should have_no_button(button)
+#end
+
+#And /^I am not an admin$/ do
+#  page.should_not have_content('Settings')
+#end
+#//////////////////////////////////////////
