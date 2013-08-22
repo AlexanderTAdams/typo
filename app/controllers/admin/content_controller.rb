@@ -36,14 +36,12 @@ class Admin::ContentController < Admin::BaseController
     end
     new_or_edit
   end
-#////////////////////////////////////////////////////////
+
   def merge
-     @article1 = Article.find_by_id(params[:id])
-     @article2 = Article.find_by_id(params[:id])
-     @article1.merge_with(@article2)
-     redirect_to("/admin/content")
+    Article.merge(params[:id], params[:merge_with])
+    redirect_to '/admin/content'
   end
-#///////////////////////////////////////////////////////
+
   def destroy
     @record = Article.find(params[:id])
 
