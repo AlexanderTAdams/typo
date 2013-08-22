@@ -2,7 +2,6 @@
 <% for article in @articles %>
 <tr <%= alternate_class %>>
   <td class='first'>
-  -debugger
     <%= link_to_edit h(article.title), article %>
     <%= show_actions article %>
   </td>

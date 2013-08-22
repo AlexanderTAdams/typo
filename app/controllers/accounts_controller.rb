@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-
+#comments...YEAH
   before_filter :verify_config
   before_filter :verify_users, :only => [:login, :recover_password]
 

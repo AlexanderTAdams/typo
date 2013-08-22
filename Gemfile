@@ -23,7 +23,8 @@ group :production do
   gem 'pg'
 end
 
-source :rubygems
+source 'https://rubygems.org'
+ruby "1.9.2"
 
 gem 'thin'
 gem 'rails', '~> 3.0.10'
@@ -56,5 +57,4 @@ group :development, :test do
   gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'launchy'
 end

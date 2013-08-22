@@ -41,30 +41,6 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
-  User.create!({:login => 'user1',
-                :password => 'bbbbbb',
-                :email => 'joe1@snow.com',
-                :profile_id => 2,
-                :name => 'user1',
-                :state => 'active'})
-  User.create!({:login => 'user2',
-                :password => 'cccccc',
-                :email => 'joe2@snow.com',
-                :profile_id => 3,
-                :name => 'user2',
-                :state => 'active'})
-end
-
-And /^I am logged into the regular user panel$/ do
-  visit '/accounts/login'
-  fill_in 'user_login', :with => 'user1'
-  fill_in 'user_password', :with => 'bbbbbb'
-  click_button 'Login'
-  if page.respond_to? :should
-    page.should have_content('Login successful')
-  else
-    assert page.has_content?('Login successful')
-  end
 end
 
 And /^I am logged into the admin panel$/ do
