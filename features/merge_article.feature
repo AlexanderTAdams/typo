@@ -1,15 +1,25 @@
 Feature: Merge Articles
   As a blog administrator
-  In order to organize information on certain topic
-  I want to be able to merge articles on my blog
+  In order to reduce duplication on the blog
+  I want to merge two similar articles into one
 
   Background:
     Given the blog is set up
+    And the following articles exist:
+    | title         | author        | body                                         | published |
+    | A first post  | First Author  | The text in the first blog post.             | true      |
+    | A second post | Second Author | Followed by the text in a similar blog post. | true      |
+    And the following users exist:
+    | login         | password         | email                    | name             | profile_id |
+    | publisher     | publisher_pw     | publisher@domain.org     | Blog Publisher   | 2          |
+    | administrator | administrator_pw | administrator@domain.org | Blog Admin       | 1          |
 
-Scenario: Non-admin should not see the merge article link
-Given I am logged into the regular user panel
-And I am on the edit page of article 1
-Then I should not see "Merge Articles"
-And show me the page
+  Scenario: An admin can see the option to merge articles
+    Given I am logged into the admin panel as "administrator"
+    And I visit the the edit page for "A first post"
+    Then I should see "Merge Articles"
 
-
+  Scenario: A non-admin cannot see the option to merge articles
+    Given I am logged into the admin panel as "publisher"
+    And I visit the the edit page for "A first post"
+    Then I should not see "Merge Articles"
