@@ -11,7 +11,7 @@ describe "admin/content/new.html.erb" do
     article.stub(:text_filter) { text_filter }
     view.stub(:current_user) { admin }
     view.stub(:this_blog) { blog }
-    
+
     # FIXME: Nasty. Controller should pass in @categories and @textfilters.
     Category.stub(:all) { [] }
     TextFilter.stub(:all) { [text_filter] }
@@ -33,5 +33,42 @@ describe "admin/content/new.html.erb" do
     assign(:macros, [])
     assign(:resources, [])
     render
+  end
+
+  it "let admin see a merge button" do
+    assign(:images, [])
+    assign(:macros, [])
+    assign(:resources, [])
+    render
+    rendered.should contain "Merge"
+  end
+end
+
+describe "admin/content/new.html.erb" do
+ before do
+    user = stub_model(User, :settings => {:editor => 'simple'}, :admin? => false,
+                       :text_filter_name => "user", :profile_label => "user")
+
+    blog = mock_model(Blog, :base_url => "http://myblog.net/")
+    article = stub_model(Article).as_new_record
+    text_filter = stub_model(TextFilter)
+
+    article.stub(:text_filter) { text_filter }
+    view.stub(:current_user) { user }
+    view.stub(:this_blog) { blog }
+
+    # FIXME: Nasty. Controller should pass in @categories and @textfilters.
+    Category.stub(:all) { [] }
+    TextFilter.stub(:all) { [text_filter] }
+
+    assign :article, article
+  end
+
+  it "let user see no merge button" do
+    assign(:images, [])
+    assign(:macros, [])
+    assign(:resources, [])
+    render
+    rendered.should_not contain "Merge"
   end
 end
